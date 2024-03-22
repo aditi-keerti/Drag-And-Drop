@@ -21,9 +21,7 @@ cloudinary.config({
 app.post('/upload', upload.single('file'), async (req, res) => {
   try {
     // Upload file to Cloudinary
-    const result = await cloudinary.uploader.upload(req.file.buffer, {
-      upload_preset: 'YOUR_CLOUDINARY_UPLOAD_PRESET'
-    });
+    const result = await cloudinary.uploader.upload(req.file.buffer);
 
     // Optionally, you can delete the file from memory after uploading to Cloudinary
     // fs.unlinkSync(req.file.path);

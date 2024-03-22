@@ -43,10 +43,16 @@ async function handleDrop(e) {
 }
 
 async function handleFiles(files) {
+    if (!files || files.length === 0) {
+        console.error('No files selected or dropped');
+        return;
+    }
+
     for (const file of files) {
         await uploadFile(file);
     }
 }
+
 
 async function uploadFile(file) {
     const formData = new FormData();
@@ -54,7 +60,7 @@ async function uploadFile(file) {
     formData.append('upload_preset', 'YOUR_CLOUDINARY_UPLOAD_PRESET');
 
     try {
-        const response = await fetch('https://api.cloudinary.com/v1_1/YOUR_CLOUD_NAME/image/upload', {
+        const response = await fetch('http://localhost:3000/upload', {
             method: 'POST',
             body: formData,
         });
